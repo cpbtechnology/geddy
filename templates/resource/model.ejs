@@ -17,7 +17,15 @@ for (var i in properties) {
 }
 %>
   this.defineProperties({
-    <%- propertyOutput.join(",\n    "); %>
+<% for (var i in properties) { -%>
+<% if (properties[i].name && properties[i].name !== 'id') { -%>
+<% if (i === 'default') { -%>
+    <%= properties[i].name %>: {type: '<%= properties[i].type %>', required: true},
+<% } else { -%>
+    <%= properties[i].name %>: {type: '<%= properties[i].type %>'},
+<% } -%>
+<% } -%>
+<% } -%>
   });
 
 <% for(var i in properties) { -%>
